@@ -1,33 +1,42 @@
 import random
-from defs import calc_vida
-from defs import calc_block
-
+import time
+from defs import mostrar_inventario
+from defs import desequipar_arma
 from player import player
+from player import inv_player
 
 import caminho_1
 
-pc1 = "Caminho 1: facil com recompensas pequenas"
-pc2 = "Caminho 2: mediano com recompensas pequenas e grandes"
-pc3 = "Caminho 3: dificil com recompensas grandes "
-c1 = "caminho 1"
-c2 = "caminho 2"
-c3 = "caminho 3"
+
+
+
 while True:
     # vida do player +20 por nivel
-    
-    player = input("Digite seu nome de jogador:\n")
+    nome = input("Digite seu nome de jogador:\n")
 
-    print("\nvc acorda no meio do nada nivel 1 com apenas um pedaço de madeira")
+
+    print("\nvc acorda no meio do nada nivel 1 com apenas um pedaço de madeira\n")
+    time.sleep(0.5)
+    guardar = input("voce percebe que tem um inventario com 3 slots, guardar o pedaço de madeira? (s/n)\n")
+    
+    if guardar == "s":
+        desequipar_arma(player, inv_player)
+        
+
+
+
+    time.sleep(0.8)
     print("olhando para frente voce ve 3 caminhos\n")
-    print(f"{pc1}")
-    print(f"{pc2}")
-    print(f"{pc3}\n")
+    print("(1)Caminho: facil com recompensas pequenas")
+
     p1 = input("para qual deles vc vai?\n")
 
-    if p1 == c1:
-        player = caminho_1.executar_caminho1(player)
-
-    if player.player("vida") <= 0:
+    if p1 == "1":
+        caminho_1 = caminho_1.executar_caminho1(player)
+        print("\n\nCABO")
+        break
+    if player["vida"] <= 0:
         r = input("Tentar denovo? (s/n): ")
         if r.lower() != "s":
             break
+
