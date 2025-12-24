@@ -1,9 +1,8 @@
 import random
 import time
-from defs import mostrar_inventario
-from defs import desequipar_arma
-from player import player
-from player import inv_player
+
+from defs import desequipar_arma, atualizar_status
+from player import criar_player
 
 import caminho_1
 
@@ -13,18 +12,20 @@ import caminho_1
 while True:
     # vida do player +20 por nivel
     nome = input("Digite seu nome de jogador:\n")
-
+    player = criar_player(nome)
+    atualizar_status(player)
+    player["vida"] = player["vida_max"]
 
     print("\nvc acorda no meio do nada nivel 1 com apenas um pedaço de madeira\n")
     time.sleep(0.5)
     guardar = input("voce percebe que tem um inventario com 3 slots, guardar o pedaço de madeira? (s/n)\n")
     
     if guardar == "s":
-        desequipar_arma(player, inv_player)
+        desequipar_arma(player, player["inventario"])
         
 
 
-
+    print()
     time.sleep(0.8)
     print("olhando para frente voce ve 3 caminhos\n")
     print("(1)Caminho: facil com recompensas pequenas")
